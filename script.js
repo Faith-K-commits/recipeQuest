@@ -103,15 +103,33 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`)
         .then(response => response.json())
         .then(recipe => {
-            const instructionsSection = document.getElementById('instructions-section');
-            instructionsSection.innerHTML = `<p>${recipe.instructions}</p>`;
-            instructionsSection.style.display = 'flex';
+            const popupCard = document.createElement('div');
+            popupCard.classList.add('popup-card');
+            // FIXME: Fix card to properly display instructions
 
-            document.getElementById('results-section').style.display = 'none';
-            
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.addEventListener('click', () => {
+                popupCard.remove();
+            });
+            popupCard.appendChild(closeButton);
+
+            const instructionsTitle = document.createElement('h2');
+            instructionsTitle.textContent = 'Instructions:';
+            popupCard.appendChild(instructionsTitle);
+
+            const instructionsList = document.createElement('ol');
+            recipe.instructions.split('. ').forEach(instruction => {
+                const listItem = document.createElement('li');
+                listItem.textContent = instruction;
+                instructionsList.appendChild(listItem);
+            });
+            popupCard.appendChild(instructionsList);
+
+            document.body.appendChild(popupCard);
         })
         .catch(error => {
             console.error('Error fetching recipe instructions:', error);
         });
-}
+    }
 });
