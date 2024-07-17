@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+/* CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: poppins, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(./assets/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+header {
+  background-color: #4caf50;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+
+main {
+  padding: 1rem;
+  width: 90%;
+  max-width: 800px;
+}
+
+#hero {
+  padding: 20px;
+  text-align: center;
+}
+
+#hero h2 {
+  font-size: 2.5rem;
+  color: #4caf50;
+}
+
+#hero p {
+  font-size: 1rem;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#search-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+#ingredient-input {
+  width: 70%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#search-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+#search-button:hover {
+  background-color: #45a049;
+}
+
+#results-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.results-heading {
+  margin-bottom: 20px;
+  text-align: center; /* Center the heading */
+}
+
+.recipe-card {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 300px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.recipe-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.recipe-card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+#instructions-section {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#instructions-section p {
+  font-size: 1rem;
+  color: #333;
+}
+
+#back-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+#back-button:hover {
+  background-color: #45a049;
+}
