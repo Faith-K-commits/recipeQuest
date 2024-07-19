@@ -39,4 +39,4 @@ You can see a live demo of the app [here](#) (replace with your deployed app URL
 2. Click the "Search" button to fetch recipes based on your input.
 3. Browse through the displayed recipe cards.
 4. Click "View Instructions" on any recipe card to see detailed cooking instructions.
-5. Use the "Back" button to return to the list of recipes.
+5. Use the "Close" button to return to the list of recipes.
