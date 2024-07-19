@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     instructionsButton.textContent = 'View Instructions';
                     instructionsButton.addEventListener('click', () => {
                         displayInstructions(recipe.id);
+                        resultsSection.style.display = 'none';
                     });
                     card.appendChild(instructionsButton);
     
@@ -111,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeButton.textContent = 'Close';
             closeButton.addEventListener('click', () => {
                 popupCard.remove();
+                document.getElementById('results-section').style.display = 'block';
             });
             popupCard.appendChild(closeButton);
 
@@ -118,13 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
             instructionsTitle.textContent = 'Instructions:';
             popupCard.appendChild(instructionsTitle);
 
-            const instructionsList = document.createElement('ol');
-            recipe.instructions.split('. ').forEach(instruction => {
-                const listItem = document.createElement('li');
-                listItem.textContent = instruction;
-                instructionsList.appendChild(listItem);
-            });
-            popupCard.appendChild(instructionsList);
+            const instructionsContainer = document.createElement('div');
+            instructionsContainer.innerHTML = recipe.instructions;
+            popupCard.appendChild(instructionsContainer);
 
             document.body.appendChild(popupCard);
         })
