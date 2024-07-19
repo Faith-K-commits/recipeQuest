@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 instructionsButton.textContent = 'View Instructions';
                 instructionsButton.addEventListener('click', () => {
                     displayInstructions(recipe.id);
+                    randomSection.style.display = 'none';
                 });
                 card.appendChild(instructionsButton);
 
@@ -123,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeButton.addEventListener('click', () => {
                 popupCard.remove();
                 document.getElementById('results-section').style.display = 'block';
+                randomSection.style.display = 'block';
             });
             popupCard.appendChild(closeButton);
 
