@@ -1,42 +1,42 @@
 const apiKey = '0a994f055a9e491ab6fc160fac836c64';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=8`)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const randomRecipes = data.recipes;
-    //         const randomSection = document.getElementById('random-section');
-    //         randomSection.innerHTML = ''; 
+    fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=8`)
+        .then(response => response.json())
+        .then(data => {
+            const randomRecipes = data.recipes;
+            const randomSection = document.getElementById('random-section');
+            randomSection.innerHTML = ''; 
 
-    //         const gridContainer = document.createElement('div');
-    //         gridContainer.classList.add('grid-container');
-    //         randomSection.appendChild(gridContainer);
+            const gridContainer = document.createElement('div');
+            gridContainer.classList.add('grid-container');
+            randomSection.appendChild(gridContainer);
 
-    //         randomRecipes.forEach(recipe => {
-    //             const card = document.createElement('div');
-    //             card.classList.add('recipe-card');
+            randomRecipes.forEach(recipe => {
+                const card = document.createElement('div');
+                card.classList.add('recipe-card');
 
-    //             const img = document.createElement('img');
-    //             img.src = recipe.image;
-    //             card.appendChild(img);
+                const img = document.createElement('img');
+                img.src = recipe.image;
+                card.appendChild(img);
 
-    //             const title = document.createElement('h3');
-    //             title.textContent = recipe.title;
-    //             card.appendChild(title);
+                const title = document.createElement('h3');
+                title.textContent = recipe.title;
+                card.appendChild(title);
 
-    //             const instructionsButton = document.createElement('button');
-    //             instructionsButton.textContent = 'View Instructions';
-    //             instructionsButton.addEventListener('click', () => {
-    //                 displayInstructions(recipe.id);
-    //             });
-    //             card.appendChild(instructionsButton);
+                const instructionsButton = document.createElement('button');
+                instructionsButton.textContent = 'View Instructions';
+                instructionsButton.addEventListener('click', () => {
+                    displayInstructions(recipe.id);
+                });
+                card.appendChild(instructionsButton);
 
-    //             gridContainer.appendChild(card);
-    //         });
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching random recipes:', error);
-    //     });
+                gridContainer.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching random recipes:', error);
+        });
 
     document.getElementById('search-button').addEventListener('click', searchRecipes);
 
@@ -53,44 +53,53 @@ document.addEventListener('DOMContentLoaded', () => {
         const input = inputElement.value;
         const ingredients = input.split(',').map(ingredient => ingredient.trim());
         const queryString = ingredients.join(',');
-    
+
+        if (input === '') {
+            displayMessage('Please enter an ingredient to search for recipes.');
+            return;
+        }
         fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${queryString}&apiKey=${apiKey}`)
             .then(response => response.json())
             .then(recipes => {
-                const resultsSection = document.getElementById('results-section');
-                resultsSection.innerHTML = ''; // Clear previous results
+                if (recipes.length === 0) {
+                    displayMessage('No recipes found for the given ingredients.');
+                } else {
+                    const resultsSection = document.getElementById('results-section');
+                    resultsSection.innerHTML = ''; // Clear previous results
     
-                const heading = document.createElement('h2');
-                heading.textContent = 'Your search results:';
-                heading.classList.add('results-heading');
-                resultsSection.appendChild(heading);
+                    const heading = document.createElement('h2');
+                    heading.textContent = 'Your search results:';
+                    heading.classList.add('results-heading');
+                    resultsSection.appendChild(heading);
     
-                const gridContainer = document.createElement('div');
-                gridContainer.classList.add('grid-container');
-                resultsSection.appendChild(gridContainer);
+                    const gridContainer = document.createElement('div');
+                    gridContainer.classList.add('grid-container');
+                    resultsSection.appendChild(gridContainer);
     
-                recipes.forEach(recipe => {
-                    const card = document.createElement('div');
-                    card.classList.add('recipe-card');
+                    recipes.forEach(recipe => {
+                        const card = document.createElement('div');
+                        card.classList.add('recipe-card');
     
-                    const img = document.createElement('img');
-                    img.src = recipe.image;
-                    card.appendChild(img);
+                        const img = document.createElement('img');
+                        img.src = recipe.image;
+                        card.appendChild(img);
     
-                    const title = document.createElement('h3');
-                    title.textContent = recipe.title;
-                    card.appendChild(title);
+                        const title = document.createElement('h3');
+                        title.textContent = recipe.title;
+                        card.appendChild(title);
     
-                    const instructionsButton = document.createElement('button');
-                    instructionsButton.textContent = 'View Instructions';
-                    instructionsButton.addEventListener('click', () => {
-                        displayInstructions(recipe.id);
-                        resultsSection.style.display = 'none';
+                        const instructionsButton = document.createElement('button');
+                        instructionsButton.textContent = 'View Instructions';
+                        instructionsButton.addEventListener('click', () => {
+                            displayInstructions(recipe.id);
+                            resultsSection.style.display = 'none';
+                        });
+                        card.appendChild(instructionsButton);
+    
+                        gridContainer.appendChild(card);
                     });
-                    card.appendChild(instructionsButton);
-    
-                    gridContainer.appendChild(card);
-                });
+                }
+                
     
                 // Clear the input field after displaying the results
                 inputElement.value = '';
@@ -106,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(recipe => {
             const popupCard = document.createElement('div');
             popupCard.classList.add('popup-card');
-            // FIXME: Fix card to properly display instructions
 
             const closeButton = document.createElement('button');
             closeButton.textContent = 'Close';
@@ -117,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             popupCard.appendChild(closeButton);
 
             const instructionsTitle = document.createElement('h2');
-            instructionsTitle.textContent = 'Instructions:';
+            instructionsTitle.textContent = `Instructions for ${recipe.title}`;
             popupCard.appendChild(instructionsTitle);
 
             const instructionsContainer = document.createElement('div');
@@ -129,5 +137,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Error fetching recipe instructions:', error);
         });
+    }
+    function displayMessage(message) {
+        const resultsSection = document.getElementById('results-section');
+        const messageElement = document.createElement('p');
+        messageElement.textContent = message;
+        messageElement.classList.add('message');
+        resultsSection.appendChild(messageElement);
+
+        setTimeout(() => {
+            messageElement.remove();
+        }, 10000);
     }
 });
