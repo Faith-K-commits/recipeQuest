@@ -1,4 +1,4 @@
-const apiKey = '0a994f055a9e491ab6fc160fac836c64';
+const apiKey = window.API_KEY;
 
 document.addEventListener('DOMContentLoaded', () => {
     const randomSection = document.getElementById('random-section');
