@@ -12,7 +12,7 @@ RecipeQuest is a web application that helps users find recipes based on the ingr
 
 ## Demo
 
-You can see a live demo of the app [here](#) (replace with your deployed app URL).
+You can see a live demo of the app [here](https://recipequest.netlify.app/) (replace with your deployed app URL).
 
 ## Technologies Used
 
