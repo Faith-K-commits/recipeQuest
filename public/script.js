@@ -1,11 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Retrieve API key from the global window object
     const apiKey = window.API_KEY;
+    if (!apiKey) {
+        console.error('API key is not defined.');
+        return;
+    }
     const randomSection = document.getElementById('random-section');
     const resultsSection = document.getElementById('results-section');
     const inputElement = document.getElementById('ingredient-input');
 
     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=8`)
-        .then(response => response.json())
+        .then(response => {
+            if(!response.ok){
+                throw new Error('Network response was not okay.')
+            }
+            return response.json()
+        })
         .then(data => {
             const randomRecipes = data.recipes;
             randomSection.innerHTML = ''; 
