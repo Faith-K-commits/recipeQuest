@@ -1,6 +1,5 @@
-const apiKey = window.API_KEY;
-
 document.addEventListener('DOMContentLoaded', () => {
+    const apiKey = window.API_KEY;
     const randomSection = document.getElementById('random-section');
     const resultsSection = document.getElementById('results-section');
     const inputElement = document.getElementById('ingredient-input');

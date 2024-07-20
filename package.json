@@ -2,10 +2,9 @@
   "name": "recipefinder",
   "version": "1.0.0",
   "description": "RecipeQuest is a web application that helps users find recipes based on the ingredients they have on hand. This project is a one-page web app built using HTML, CSS, and vanilla JavaScript. It leverages the Spoonacular API to fetch recipes dynamically and display them to the user.",
-  "main": "build.js",
+  "main": "index.html", 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
