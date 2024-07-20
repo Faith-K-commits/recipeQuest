@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Retrieve API key from the global window object
-    const apiKey = window.API_KEY;
+    const apiKey = '0a994f055a9e491ab6fc160fac836c64';
     if (!apiKey) {
         console.error('API key is not defined.');
         return;
